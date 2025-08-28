@@ -22,7 +22,7 @@ A modern, responsive portfolio website for a BCA student showcasing projects, sk
 - **Error Handling**: Comprehensive error handling and logging
 
 ### 🎨 Design Features
-- **Color Scheme**: Dark Blue (#0a1a4a) and Accent Cyan (#8ee5ff)
+- **Color Scheme**: Modern slate gray (#2c3e50) and vibrant blue (#3498db)
 - **Typography**: Montserrat (headings) and Open Sans (body)
 - **Animations**: Smooth hover effects and scroll animations
 - **Responsive**: Works perfectly on all device sizes
@@ -38,8 +38,8 @@ A modern, responsive portfolio website for a BCA student showcasing projects, sk
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd porfolio_website_safal_oli
+   git clone https://github.com/safaloli0/Portfolio-Website.git
+   cd Portfolio-Website
    ```
 
 2. **Install dependencies**
@@ -70,7 +70,7 @@ A modern, responsive portfolio website for a BCA student showcasing projects, sk
 ## 📁 Project Structure
 
 ```
-porfolio_website_safal_oli/
+Portfolio-Website/
 ├── public/                 # Frontend static files
 │   ├── css/
 │   │   └── style.css      # Main stylesheet
@@ -240,4 +240,3 @@ If you have any questions or need help:
 ---
 
 **Made with ❤️ by Safal Oli**
-
