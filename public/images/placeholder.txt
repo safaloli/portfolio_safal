@@ -1,0 +1,15 @@
+This directory should contain the following images:
+
+1. profile.jpg - Your professional profile photo (300x300px recommended)
+2. hero-bg.jpg - Hero section background image
+3. placeholder.jpg - Default project image placeholder
+4. blog-placeholder.jpg - Default blog post image placeholder
+
+For project images, create a subdirectory:
+- projects/ - Contains project screenshots and images
+
+For blog images, create a subdirectory:
+- blog/ - Contains blog post featured images
+
+Note: Replace these placeholder images with your actual images for a complete portfolio.
+
