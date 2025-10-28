@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Project Details - Safal Oli Portfolio">
+    <title>Project Details - Safal Oli</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar Container -->
+    <div id="navbar-container"></div>
+
+    <main class="min-h-screen">
+        <!-- Project Detail Container -->
+        <div class="container mx-auto px-6 py-12 max-w-6xl">
+            
+            <!-- Back Button - Loading State -->
+            <div id="back-button-container" class="mb-8 flex justify-end">
+                <div class="animate-pulse">
+                    <div class="h-12 w-48 bg-gray-200 rounded-lg"></div>
+                </div>
+            </div>
+
+            <!-- Project Title and Subtitle - Loading State -->
+            <div id="project-header" class="mb-8">
+                <div class="animate-pulse">
+                    <div class="h-12 bg-gray-200 rounded w-96 mb-4"></div>
+                    <div class="h-6 bg-gray-200 rounded w-2/3"></div>
+                </div>
+            </div>
+
+            <!-- Hero Image - Loading State -->
+            <div id="hero-image-container" class="mb-16">
+                <div class="animate-pulse">
+                    <div class="w-full h-96 bg-gray-200 rounded-2xl"></div>
+                </div>
+            </div>
+
+            <!-- Project Overview Section - Loading State -->
+            <div id="project-overview" class="mb-12">
+                <div class="animate-pulse">
+                    <div class="h-8 bg-gray-200 rounded w-64 mb-6"></div>
+                    <div class="h-4 bg-gray-200 rounded w-full mb-3"></div>
+                    <div class="h-4 bg-gray-200 rounded w-full mb-3"></div>
+                    <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                </div>
+            </div>
+
+            <!-- Problem Section - Loading State -->
+            <div id="problem-section" class="mb-12">
+                <div class="animate-pulse">
+                    <div class="h-8 bg-gray-200 rounded w-48 mb-6"></div>
+                    <div class="h-4 bg-gray-200 rounded w-full mb-3"></div>
+                    <div class="h-4 bg-gray-200 rounded w-full mb-3"></div>
+                    <div class="h-4 bg-gray-200 rounded w-4/5"></div>
+                </div>
+            </div>
+
+            <!-- Solution Section - Loading State -->
+            <div id="solution-section" class="mb-12">
+                <div class="animate-pulse">
+                    <div class="h-8 bg-gray-200 rounded w-48 mb-6"></div>
+                    <div class="h-4 bg-gray-200 rounded w-full mb-3"></div>
+                    <div class="h-4 bg-gray-200 rounded w-full mb-3"></div>
+                    <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                </div>
+            </div>
+
+            <!-- Screenshots Section - Loading State -->
+            <div id="screenshots-section" class="mb-12">
+                <div class="animate-pulse grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-gray-200 h-96 rounded-2xl"></div>
+                    <div class="bg-gray-200 h-96 rounded-2xl"></div>
+                    <div class="bg-gray-200 h-96 rounded-2xl"></div>
+                </div>
+            </div>
+
+            <!-- Tools Used Section - Loading State -->
+            <div id="tools-section" class="mb-12">
+                <div class="animate-pulse">
+                    <div class="h-8 bg-gray-200 rounded w-48 mb-6"></div>
+                    <div class="flex flex-wrap gap-6">
+                        <div class="h-16 w-32 bg-gray-200 rounded-lg"></div>
+                        <div class="h-16 w-32 bg-gray-200 rounded-lg"></div>
+                        <div class="h-16 w-32 bg-gray-200 rounded-lg"></div>
+                        <div class="h-16 w-32 bg-gray-200 rounded-lg"></div>
+                        <div class="h-16 w-32 bg-gray-200 rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Result Section - Loading State -->
+            <div id="result-section" class="mb-12">
+                <div class="animate-pulse">
+                    <div class="h-8 bg-gray-200 rounded w-48 mb-8"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-gray-200 h-48 rounded-2xl"></div>
+                        <div class="bg-gray-200 h-48 rounded-2xl"></div>
+                        <div class="bg-gray-200 h-48 rounded-2xl"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Load Scripts -->
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="js/data/portfolioData.js"></script>
+    <script src="js/pageLoader/projectDetailPageLoader.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Initialize components when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Navbar
+            const navbar = new Navbar({
+                brandName: 'Safal Oli',
+                brandIcon: '⛵',
+                links: [
+                    { text: 'Home', href: 'index.html' },
+                    { text: 'About', href: 'aboutMe.html' },
+                    { text: 'Projects', href: 'projects.html' },
+                    { text: 'Services', href: 'services.html' },
+                    { text: 'Contact', href: 'contact.html' }
+                ],
+                ctaButton: { text: 'Hire Me', href: 'contact.html' }
+            });
+            navbar.init('navbar-container');
+
+            // Initialize Footer
+            const footer = new Footer({
+                brandName: 'Safal Oli',
+                year: 2024,
+                tagline: 'Built with Node.js & Tailwind CSS',
+                socialLinks: [
+                    { icon: '📧', href: 'mailto:your.email@example.com', title: 'Email', ariaLabel: 'Send me an email' },
+                    { icon: '💻', href: 'https://github.com/yourusername', title: 'GitHub', ariaLabel: 'Visit my GitHub' },
+                    { icon: '💼', href: 'https://linkedin.com/in/yourprofile', title: 'LinkedIn', ariaLabel: 'Connect on LinkedIn' }
+                ],
+                showQuickLinks: true,
+                quickLinks: [
+                    { text: 'Home', href: 'index.html' },
+                    { text: 'About', href: 'aboutMe.html' },
+                    { text: 'Projects', href: 'projects.html' },
+                    { text: 'Contact', href: '#contact' }
+                ]
+            });
+            footer.init('footer-container');
+
+            // Load project detail content dynamically
+            if (typeof ProjectDetailPageLoader !== 'undefined') {
+                const loader = new ProjectDetailPageLoader();
+                loader.loadContent();
+            }
+        });
+    </script>
+</body>
+</html>
+

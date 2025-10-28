@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Safal Oli - Get in touch for projects and collaborations">
+    <title>Contact - Safal Oli</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar Container -->
+    <div id="navbar-container"></div>
+
+    <main>
+        <!-- Contact Section -->
+        <section class="py-20 bg-gray-50 min-h-screen">
+            <div class="container mx-auto px-6">
+                <!-- Header - Loading State -->
+                <div id="contact-header" class="text-center mb-16">
+                    <div class="animate-pulse">
+                        <div class="h-12 bg-gray-200 rounded w-64 mx-auto mb-4"></div>
+                        <div class="h-4 bg-gray-200 rounded w-96 mx-auto mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-80 mx-auto"></div>
+                    </div>
+                </div>
+
+                <!-- Contact Form and Info Grid - Loading State -->
+                <div class="grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+                    <!-- Contact Form - Loading State -->
+                    <div id="contact-form" class="lg:col-span-2">
+                        <div class="bg-white p-8 rounded-xl shadow-sm animate-pulse">
+                            <!-- Name Field -->
+                            <div class="mb-6">
+                                <div class="h-4 bg-gray-200 rounded w-16 mb-2"></div>
+                                <div class="h-12 bg-gray-100 rounded"></div>
+                            </div>
+                            <!-- Email Field -->
+                            <div class="mb-6">
+                                <div class="h-4 bg-gray-200 rounded w-16 mb-2"></div>
+                                <div class="h-12 bg-gray-100 rounded"></div>
+                            </div>
+                            <!-- Subject Field -->
+                            <div class="mb-6">
+                                <div class="h-4 bg-gray-200 rounded w-20 mb-2"></div>
+                                <div class="h-12 bg-gray-100 rounded"></div>
+                            </div>
+                            <!-- Message Field -->
+                            <div class="mb-6">
+                                <div class="h-4 bg-gray-200 rounded w-20 mb-2"></div>
+                                <div class="h-32 bg-gray-100 rounded"></div>
+                            </div>
+                            <!-- Button -->
+                            <div class="h-14 bg-gray-200 rounded"></div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Info and Socials - Loading State -->
+                    <div id="contact-info" class="lg:col-span-1">
+                        <div class="space-y-8">
+                            <!-- Direct Info Loading -->
+                            <div class="bg-white p-8 rounded-xl shadow-sm animate-pulse">
+                                <div class="h-6 bg-gray-200 rounded w-32 mb-6"></div>
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-gray-200 rounded-full"></div>
+                                        <div class="h-4 bg-gray-200 rounded w-40"></div>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-gray-200 rounded-full"></div>
+                                        <div class="h-4 bg-gray-200 rounded w-24"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Socials Loading -->
+                            <div class="bg-white p-8 rounded-xl shadow-sm animate-pulse">
+                                <div class="h-6 bg-gray-200 rounded w-24 mb-6"></div>
+                                <div class="flex gap-4">
+                                    <div class="w-12 h-12 bg-gray-200 rounded-full"></div>
+                                    <div class="w-12 h-12 bg-gray-200 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom CTA - Loading State -->
+                <div id="contact-cta" class="mt-20 text-center">
+                    <div class="animate-pulse">
+                        <div class="h-8 bg-gray-200 rounded w-96 mx-auto"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Load Components and Scripts -->
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="js/pageLoader/contactPageLoader.js"></script>
+    <script src="js/script.js"></script>
+    
+    <script>
+        // Initialize components and page loader
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialize Navbar
+            const navbar = new Navbar({
+                brandName: 'Safal Oli',
+                brandIcon: '⛵',
+                links: [
+                    { text: 'Home', href: 'index.html' },
+                    { text: 'About', href: 'aboutMe.html' },
+                    { text: 'Projects', href: 'projects.html' },
+                    { text: 'Services', href: 'services.html' },
+                    { text: 'Contact', href: 'contact.html' }
+                ],
+                ctaButton: { text: 'Hire Me', href: 'contact.html' }
+            });
+            navbar.init('navbar-container');
+
+            // Initialize Footer
+            const footer = new Footer({
+                brandName: 'Safal Oli',
+                tagline: 'Built with Node.js & Tailwind CSS',
+                socialLinks: [
+                    { icon: '📧', href: 'mailto:safal.oli@example.com', title: 'Email', ariaLabel: 'Email me' },
+                    { icon: '💻', href: 'https://github.com/safal-oli', title: 'GitHub', ariaLabel: 'Visit my GitHub' },
+                    { icon: '💼', href: 'https://linkedin.com/in/safal-oli', title: 'LinkedIn', ariaLabel: 'Visit my LinkedIn' }
+                ],
+                quickLinks: [
+                    { text: 'Home', href: 'index.html' },
+                    { text: 'About', href: 'aboutMe.html' },
+                    { text: 'Projects', href: 'projects.html' },
+                    { text: 'Services', href: 'services.html' },
+                    { text: 'Contact', href: 'contact.html' }
+                ]
+            });
+            footer.init('footer-container');
+
+            // Initialize page loader
+            const loader = new ContactPageLoader();
+            await loader.loadContent();
+        });
+    </script>
+</body>
+</html>
+

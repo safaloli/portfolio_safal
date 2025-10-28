@@ -1,242 +1,156 @@
-# 🚀 Safal Oli - Portfolio Website
+# Portfolio Website - Safal Oli
 
-A modern, responsive portfolio website for a BCA student showcasing projects, skills, and professional experience. Built with Node.js, Express, and modern web technologies.
+A modern and responsive portfolio website built with Node.js and Express.
 
-## ✨ Features
+## Features
 
-### 🎯 Core Features
-- **Responsive Design**: Mobile-first approach with Bootstrap 5
-- **Modern UI/UX**: Clean, professional design with smooth animations
-- **Project Showcase**: Display projects with filtering by category
-- **Blog Section**: Share knowledge and insights
-- **Contact Form**: Functional contact form with email integration
-- **Skills Display**: Interactive skills and technologies section
-- **Experience Timeline**: Professional and educational timeline
+- ✨ Modern and clean design with Tailwind CSS
+- 📱 Fully responsive
+- 🚀 Fast and lightweight
+- 🎨 Easy to customize with utility classes
+- 🔧 Built with Express.js and Tailwind CSS
+- 🎯 Beautiful gradient hero section
+- 💼 Project showcase with tags
+- 📧 Contact form included
 
-### 🛠 Technical Features
-- **Backend API**: RESTful API with Express.js
-- **Email Integration**: Contact form sends emails via Nodemailer
-- **Rate Limiting**: API protection with express-rate-limit
-- **Security**: Helmet.js for security headers
-- **CORS Support**: Cross-origin resource sharing enabled
-- **Error Handling**: Comprehensive error handling and logging
-
-### 🎨 Design Features
-- **Color Scheme**: Modern slate gray (#2c3e50) and vibrant blue (#3498db)
-- **Typography**: Montserrat (headings) and Open Sans (body)
-- **Animations**: Smooth hover effects and scroll animations
-- **Responsive**: Works perfectly on all device sizes
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn
-- Git
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/safaloli0/Portfolio-Website.git
-   cd Portfolio-Website
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**
-   ```bash
-   cp env.example .env
-   ```
-   
-   Edit `.env` file with your configuration:
-   ```env
-   PORT=3000
-   EMAIL_USER=your-email@gmail.com
-   EMAIL_PASS=your-app-password
-   ```
-
-4. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-
-5. **Open your browser**
-   Visit `http://localhost:3000`
-
-## 📁 Project Structure
+## Project Structure
 
 ```
-Portfolio-Website/
-├── public/                 # Frontend static files
+portfolio-website-safal-oli/
+├── public/
 │   ├── css/
-│   │   └── style.css      # Main stylesheet
+│   │   ├── input.css      (Tailwind source)
+│   │   └── style.css      (Generated output)
 │   ├── js/
-│   │   └── main.js        # Frontend JavaScript
-│   ├── images/            # Images and assets
-│   └── index.html         # Main HTML file
-├── routes/                # API routes
-│   ├── contact.js         # Contact form handling
-│   ├── projects.js        # Projects API
-│   └── blog.js           # Blog posts API
-├── server.js              # Main server file
-├── package.json           # Dependencies and scripts
-├── env.example           # Environment variables template
-└── README.md             # Project documentation
+│   │   └── script.js
+│   └── index.html
+├── server.js
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+├── .env
+├── .env.example
+├── .gitignore
+└── README.md
 ```
 
-## 🔧 Configuration
+## Prerequisites
 
-### Email Setup (for contact form)
+Before you begin, ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
 
-1. **Gmail Setup**:
-   - Enable 2-factor authentication
-   - Generate an App Password
-   - Use the App Password in your `.env` file
+## Installation
 
-2. **Other Email Providers**:
-   - Update the transporter configuration in `routes/contact.js`
-   - Modify SMTP settings as needed
+1. Clone this repository or navigate to the project directory
 
-### Customization
+2. Install dependencies:
+```bash
+npm install
+```
 
-#### Personal Information
-- Update personal details in `public/index.html`
-- Replace placeholder images in `public/images/`
-- Modify project data in `routes/projects.js`
-- Update blog posts in `routes/blog.js`
+3. Create your environment file:
+```bash
+cp .env.example .env
+```
 
-#### Styling
-- Modify CSS variables in `public/css/style.css`
-- Update color scheme, fonts, and animations
-- Customize responsive breakpoints
+4. (Optional) Modify the `.env` file to change the port or other settings
 
-#### Content
-- Update hero section content
-- Modify skills and technologies
-- Edit experience and education timeline
-- Update social media links
+## Usage
 
-## 📱 Responsive Design
+### First Time Setup
+After installing dependencies, build the CSS:
+```bash
+npm run build:css
+```
 
-The website is fully responsive and optimized for:
-- **Desktop**: 1200px and above
-- **Tablet**: 768px - 1199px
-- **Mobile**: Below 768px
-
-## 🎯 API Endpoints
-
-### Projects
-- `GET /api/projects` - Get all projects
-- `GET /api/projects/recent` - Get recent projects
-- `GET /api/projects/ongoing` - Get ongoing projects
-- `GET /api/projects/category/:category` - Filter by category
-- `GET /api/projects/:id` - Get specific project
-
-### Blog
-- `GET /api/blog` - Get all blog posts
-- `GET /api/blog/recent` - Get recent blog posts
-- `GET /api/blog/:id` - Get specific blog post
-- `GET /api/blog/tag/:tag` - Filter by tag
-- `GET /api/blog/search/:query` - Search posts
-
-### Contact
-- `POST /api/contact/submit` - Submit contact form
-
-## 🚀 Deployment
-
-### Local Development
+### Development Mode (with auto-reload and CSS watch)
 ```bash
 npm run dev
 ```
+This will:
+- Build Tailwind CSS
+- Watch for CSS changes
+- Run the server with auto-reload
 
-### Production
+### Production Mode
 ```bash
+npm run build:css
 npm start
 ```
 
-### Environment Variables for Production
-```env
-NODE_ENV=production
-PORT=3000
-EMAIL_USER=your-production-email@gmail.com
-EMAIL_PASS=your-production-app-password
+The server will start on `http://localhost:3000` (or the port specified in your `.env` file)
+
+## Customization
+
+### Update Portfolio Content
+The easiest way to customize your portfolio is to edit the data file:
+
+**Edit `public/js/data/portfolioData.js`** to change:
+- Hero section (name, title, description, profile image)
+- Stats (experience, projects, availability)
+- Featured projects (with images and tags)
+- Services offered
+- Call-to-action section
+
+### Update Styling
+- Modify `public/css/input.css` to add custom styles (then run `npm run build:css`)
+- Use Tailwind utility classes directly in HTML for quick styling changes
+- Component styles can be edited in `public/components/navbar.js` and `public/components/footer.js`
+
+### Change Colors
+Edit the theme in `tailwind.config.js`:
+```javascript
+theme: {
+  extend: {
+    colors: {
+      primary: {
+        DEFAULT: '#2563eb',  // Change this
+        dark: '#1e40af',     // Change this
+        light: '#3b82f6',    // Change this
+      },
+    },
+  },
+}
 ```
 
-## 🛠 Technologies Used
+After making changes, rebuild the CSS:
+```bash
+npm run build:css
+```
 
-### Frontend
-- **HTML5**: Semantic markup
-- **CSS3**: Modern styling with CSS Grid and Flexbox
-- **JavaScript (ES6+)**: Modern JavaScript features
-- **Bootstrap 5**: Responsive framework
-- **Font Awesome**: Icons
-- **Google Fonts**: Typography
+### Tailwind CSS Documentation
+For styling options, check out [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 
-### Backend
-- **Node.js**: Runtime environment
-- **Express.js**: Web framework
-- **Nodemailer**: Email functionality
-- **Helmet**: Security middleware
-- **CORS**: Cross-origin resource sharing
-- **express-rate-limit**: Rate limiting
+## API Endpoints
 
-### Development Tools
-- **Nodemon**: Development server with auto-reload
-- **dotenv**: Environment variable management
+- `GET /` - Serves the main portfolio page
+- `GET /api/health` - Health check endpoint
 
-## 📈 Performance Features
+## Deployment
 
-- **Lazy Loading**: Images load as needed
-- **Debounced Scroll Events**: Optimized scroll handling
-- **Minified Assets**: Production-ready assets
-- **Caching**: Browser caching headers
-- **Compression**: Gzip compression for responses
+### Deploying to Heroku
+```bash
+heroku create your-app-name
+git push heroku main
+```
 
-## 🔒 Security Features
+### Deploying to Vercel/Netlify
+Follow their respective deployment guides for Node.js applications.
 
-- **Helmet.js**: Security headers
-- **Rate Limiting**: API protection
-- **Input Validation**: Form validation
-- **CORS Configuration**: Controlled cross-origin access
-- **Environment Variables**: Secure configuration management
+## Contributing
 
-## 🤝 Contributing
+Feel free to fork this project and make it your own!
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## License
 
-## 📝 License
+MIT License - feel free to use this project for your own portfolio.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Author
 
-## 👨‍💻 Author
-
-**Safal Oli**
-- BCA Student & Aspiring Developer
-- Location: Kathmandu, Nepal
-- Email: safal.oli@example.com
-
-## 🙏 Acknowledgments
-
-- Bootstrap team for the amazing framework
-- Font Awesome for the icons
-- Google Fonts for typography
-- The open-source community for inspiration
-
-## 📞 Support
-
-If you have any questions or need help:
-- Create an issue in the repository
-- Contact via email: safal.oli@example.com
-- Connect on LinkedIn: [Your LinkedIn Profile]
+Safal Oli
 
 ---
 
-**Made with ❤️ by Safal Oli**
+Made with ❤️ using Node.js, Express, and Tailwind CSS
+
