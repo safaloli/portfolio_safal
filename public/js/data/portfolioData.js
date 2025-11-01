@@ -5,13 +5,13 @@ const portfolioData = {
   // Hero Section
   hero: {
     name: 'Safal Oli',
-    title: 'Flutter Developer',
-    subtitle: 'Crafting High-Performance Mobile Experiences',
-    description: 'Expertise in building high-performance mobile apps with Flutter, UI design, and backend integration.',
+    title: '',
+    subtitle: '',
+    description: 'I build high-performance mobile apps with stunning UI/UX and seamless backend integration. Let\'s bring your vision to life.',
     profileImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
     buttons: [
-      { text: 'View My Work', href: '#projects', style: 'primary' },
-      { text: 'Hire Me', href: '#contact', style: 'secondary' }
+      { text: 'Hire Me', href: 'contact.html', style: 'primary' },
+      { text: 'View My Work', href: '#projects', style: 'secondary' }
     ]
   },
 

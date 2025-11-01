@@ -10,62 +10,104 @@ const servicesData = {
     buttonLink: '#contact'
   },
 
-  // Services Cards
+  // Services Cards (using Lucide icon names)
   services: [
     {
-      icon: '📱',
-      title: 'Mobile App Development',
-      description: 'Crafting beautiful and functional mobile apps that your users will love.',
+      icon: 'code',
+      title: 'Software Developer Services',
+      description: 'Custom solutions tailored for your needs.',
       iconBg: 'bg-blue-100',
       iconColor: 'text-blue-600'
     },
     {
-      icon: '🎨',
-      title: 'UI/UX Design',
-      description: 'Designing intuitive and engaging user interfaces that provide a seamless experience.',
+      icon: 'settings',
+      title: 'Automation & Integrations',
+      description: 'Connecting services and automating workflows.',
       iconBg: 'bg-purple-100',
       iconColor: 'text-purple-600'
     },
     {
-      icon: '💻',
-      title: 'Backend Integration',
-      description: 'Connecting your app to powerful backends for robust and scalable solutions.',
+      icon: 'smartphone',
+      title: 'Mobile App Development',
+      description: 'Building cross-platform apps with Flutter.',
+      iconBg: 'bg-blue-100',
+      iconColor: 'text-blue-600'
+    },
+    {
+      icon: 'palette',
+      title: 'UI/UX Design & Prototyping',
+      description: 'Crafting intuitive and beautiful user interfaces.',
+      iconBg: 'bg-pink-100',
+      iconColor: 'text-pink-600'
+    },
+    {
+      icon: 'cloud',
+      title: 'Cloud & Backend Solutions',
+      description: 'Scalable backend services and cloud integration.',
+      iconBg: 'bg-cyan-100',
+      iconColor: 'text-cyan-600'
+    },
+    {
+      icon: 'bar-chart-3',
+      title: 'Data & Analytics',
+      description: 'Implementing analytics for data-driven decisions.',
       iconBg: 'bg-green-100',
       iconColor: 'text-green-600'
     },
     {
-      icon: '🔧',
-      title: 'App Maintenance',
-      description: 'Ensuring your app remains up-to-date, secure, and running smoothly.',
+      icon: 'briefcase',
+      title: 'Business & Brand Solutions',
+      description: 'Digital strategies to elevate your brand.',
       iconBg: 'bg-orange-100',
       iconColor: 'text-orange-600'
+    },
+    {
+      icon: 'wrench',
+      title: 'Maintenance & Support',
+      description: 'Ongoing support to keep your apps running.',
+      iconBg: 'bg-yellow-100',
+      iconColor: 'text-yellow-600'
+    },
+    {
+      icon: 'shield-check',
+      title: 'Authentication & Admin Systems',
+      description: 'Secure auth and powerful admin panels.',
+      iconBg: 'bg-red-100',
+      iconColor: 'text-red-600'
+    },
+    {
+      icon: 'rocket',
+      title: 'Consulting & MVP Development',
+      description: 'Strategic guidance for startups and MVPs.',
+      iconBg: 'bg-indigo-100',
+      iconColor: 'text-indigo-600'
     }
   ],
 
-  // Work Process
+  // Work Process (using Lucide icon names)
   process: {
     title: 'My Work Process',
     steps: [
       {
-        icon: '🔍',
+        icon: 'search',
         title: 'Research',
         description: 'Understanding your goals and target audience.',
         iconBg: 'bg-blue-500'
       },
       {
-        icon: '🎨',
+        icon: 'palette',
         title: 'Design',
         description: 'Creating a user-centric design and prototype.',
         iconBg: 'bg-purple-500'
       },
       {
-        icon: '💻',
+        icon: 'code',
         title: 'Develop',
         description: 'Building a high-quality, performant app.',
         iconBg: 'bg-green-500'
       },
       {
-        icon: '🚀',
+        icon: 'rocket',
         title: 'Launch',
         description: 'Deploying your app to the app stores and providing support.',
         iconBg: 'bg-orange-500'

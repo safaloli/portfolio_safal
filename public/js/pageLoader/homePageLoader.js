@@ -39,14 +39,11 @@ class HomePageLoader {
     if (heroContent) {
       heroContent.innerHTML = `
         <div class="fade-in">
-          <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-4 leading-tight">
-            ${hero.name || 'Safal Oli'}: <span class="text-primary">${hero.title || 'Flutter Developer'}</span>
+          <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            Hello, I'm ${hero.name || 'Safal Oli'}
           </h1>
-          <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-6">
-            ${hero.subtitle || 'Crafting High-Performance Mobile Experiences'}
-          </h2>
-          <p class="text-gray-600 text-lg mb-8 leading-relaxed">
-            ${hero.description || 'Expertise in building high-performance mobile apps.'}
+          <p class="text-gray-600 text-lg mb-8 leading-relaxed max-w-2xl">
+            ${hero.description || 'I build high-performance mobile apps with stunning UI/UX and seamless backend integration. Let\'s bring your vision to life.'}
           </p>
           <div class="flex gap-4">
             ${hero.buttons?.map(btn => `

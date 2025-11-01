@@ -19,6 +19,7 @@ class Navbar {
       { text: 'About', href: 'aboutMe.html' },
       { text: 'Projects', href: 'projects.html' },
       { text: 'Services', href: 'services.html' },
+      { text: 'Resources', href: '#resources' },
       { text: 'Contact', href: 'contact.html' }
     ];
     this.ctaButton = options.ctaButton || { text: 'Hire Me', href: 'contact.html' };
@@ -29,13 +30,20 @@ class Navbar {
     this.scrollThreshold = 100;
     this.isMobileMenuOpen = false;
     this.isScrolling = false;
+    this.isMegaMenuOpen = false;
+    this.isResourcesMegaMenuOpen = false;
     
     // DOM element references (cached for performance)
     this.elements = {
       header: null,
       mobileMenu: null,
       mobileMenuBtn: null,
-      navLinks: null
+      navLinks: null,
+      megaMenu: null,
+      servicesLink: null,
+      resourcesMegaMenu: null,
+      resourcesBtn: null,
+      resourcesDropdown: null
     };
     
     // Bound methods for proper event listener cleanup
@@ -105,18 +113,18 @@ class Navbar {
             </div>
 
             <!-- Desktop Navigation Links -->
-            <ul class="hidden md:flex space-x-1 items-center" id="nav-links" role="menubar">
+            <ul class="hidden md:flex space-x-1 items-center relative" id="nav-links" role="menubar">
               ${navLinksHtml}
             </ul>
 
             <!-- CTA Button -->
             <div class="hidden md:block">
               <a href="${this.ctaButton.href}" 
-                 class="relative inline-flex items-center justify-center px-8 py-2.5 overflow-hidden font-bold text-white bg-gradient-to-r from-primary to-primary-dark rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 group active:scale-95"
+                 class="relative inline-flex items-center justify-center px-8 py-2.5 overflow-hidden font-bold text-sm text-white bg-gradient-to-r from-primary to-primary-dark rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 group active:scale-95"
                  data-link
                  role="button">
                 <span class="relative z-10 flex items-center gap-2">
-                  ${this.ctaButton.text}
+                ${this.ctaButton.text}
                   <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                   </svg>
@@ -147,17 +155,17 @@ class Navbar {
               <ul class="space-y-2">
                 ${mobileLinksHtml}
                 <li role="none" class="pt-3 mt-3 border-t border-gray-200/50">
-                  <a href="${this.ctaButton.href}" 
-                     class="flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-primary to-primary-dark text-white text-center font-bold rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-95 group"
+                <a href="${this.ctaButton.href}" 
+                     class="flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-primary to-primary-dark text-white text-center text-sm font-bold rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-95 group"
                      data-link
                      role="menuitem">
                     <span>${this.ctaButton.text}</span>
                     <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                     </svg>
-                  </a>
-                </li>
-              </ul>
+                </a>
+              </li>
+            </ul>
             </div>
           </div>
         </nav>
@@ -175,10 +183,57 @@ class Navbar {
     const activeClasses = isActive 
       ? 'bg-gradient-to-r from-primary/10 to-primary-dark/10 text-primary font-semibold shadow-sm' 
       : 'text-gray-700 hover:text-primary';
+    
+    // Special handling for Services link with mega menu
+    if (link.text === 'Services') {
+      return `
+        <li role="none" class="relative" id="services-dropdown">
+          <button 
+             class="nav-link px-4 py-2 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100/50 relative group text-sm ${activeClasses} flex items-center gap-1" 
+             id="services-menu-btn"
+             role="menuitem"
+             aria-haspopup="true"
+             aria-expanded="false"
+             ${isActive ? 'aria-current="page"' : ''}>
+            <span class="relative z-10">${link.text}</span>
+            <svg class="w-4 h-4 transition-transform duration-300 mega-menu-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+            ${isActive ? '<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-primary to-primary-dark rounded-full"></div>' : ''}
+            <div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary-dark/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </button>
+          ${this.renderMegaMenu()}
+        </li>
+      `;
+    }
+    
+    // Special handling for Resources link with mega menu
+    if (link.text === 'Resources') {
+      return `
+        <li role="none" id="resources-dropdown">
+          <button 
+             class="nav-link px-4 py-2 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100/50 relative group text-sm ${activeClasses} flex items-center gap-1" 
+             id="resources-menu-btn"
+             role="menuitem"
+             aria-haspopup="true"
+             aria-expanded="false"
+             ${isActive ? 'aria-current="page"' : ''}>
+            <span class="relative z-10">${link.text}</span>
+            <svg class="w-4 h-4 transition-transform duration-300 resources-menu-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+            ${isActive ? '<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-primary to-primary-dark rounded-full"></div>' : ''}
+            <div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary-dark/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </button>
+          ${this.renderResourcesMegaMenu()}
+        </li>
+      `;
+    }
+    
     return `
       <li role="none">
         <a href="${link.href}" 
-           class="nav-link px-4 py-2 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100/50 relative group ${activeClasses}" 
+           class="nav-link px-4 py-2 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100/50 relative group text-sm ${activeClasses}" 
            data-link
            role="menuitem"
            ${isActive ? 'aria-current="page"' : ''}>
@@ -187,6 +242,174 @@ class Navbar {
           <div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary-dark/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </a>
       </li>
+    `;
+  }
+
+  /**
+   * Render the mega menu for Services
+   * @returns {string} HTML string for the mega menu
+   */
+  renderMegaMenu() {
+    // Services data for mega menu with Lucide icon names
+    const services = [
+      {
+        icon: 'code',
+        title: 'Software Developer Services',
+        description: 'Custom solutions tailored for your needs.',
+      },
+      {
+        icon: 'settings',
+        title: 'Automation & Integrations',
+        description: 'Connecting services and automating workflows.',
+      },
+      {
+        icon: 'smartphone',
+        title: 'Mobile App Development',
+        description: 'Building cross-platform apps with Flutter.',
+      },
+      {
+        icon: 'palette',
+        title: 'UI/UX Design & Prototyping',
+        description: 'Crafting intuitive and beautiful user interfaces.',
+      },
+      {
+        icon: 'cloud',
+        title: 'Cloud & Backend Solutions',
+        description: 'Scalable backend services and cloud integration.',
+      },
+      {
+        icon: 'bar-chart-3',
+        title: 'Data & Analytics',
+        description: 'Implementing analytics for data-driven decisions.',
+      },
+      {
+        icon: 'briefcase',
+        title: 'Business & Brand Solutions',
+        description: 'Digital strategies to elevate your brand.',
+      },
+      {
+        icon: 'wrench',
+        title: 'Maintenance & Support',
+        description: 'Ongoing support to keep your apps running.',
+      },
+      {
+        icon: 'shield-check',
+        title: 'Authentication & Admin Systems',
+        description: 'Secure auth and powerful admin panels.',
+      },
+      {
+        icon: 'rocket',
+        title: 'Consulting & MVP Development',
+        description: 'Strategic guidance for startups and MVPs.',
+      }
+    ];
+
+    const servicesHtml = services.map(service => `
+      <div class="group p-4 rounded-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer hover:shadow-md">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-200 transition-colors">
+            <i data-lucide="${service.icon}" class="w-5 h-5 text-blue-600"></i>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-semibold text-gray-900 mb-1 text-sm group-hover:text-primary transition-colors">${service.title}</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">${service.description}</p>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <div id="mega-menu" 
+           class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[800px] bg-white rounded-2xl shadow-2xl border border-gray-200 opacity-0 invisible transition-all duration-300 z-50"
+           role="menu"
+           style="transform: translateX(-50%) translateY(10px);">
+        <div class="p-6">
+          <div class="grid grid-cols-2 gap-3">
+            ${servicesHtml}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  /**
+   * Render the mega menu for Resources
+   * @returns {string} HTML string for the resources mega menu
+   */
+  renderResourcesMegaMenu() {
+    const resourcesData = {
+      'Learn & Insights': {
+        description: 'Build authority through useful, real-world content',
+        items: [
+          { icon: 'book-open', title: 'Blog', subtitle: 'Latest articles and thoughts' },
+          { icon: 'briefcase', title: 'Case Studies', subtitle: 'In-depth project analyses' },
+          { icon: 'video', title: 'Tutorials', subtitle: 'Step-by-step guides' },
+          { icon: 'file-text', title: 'Whitepapers', subtitle: 'Comprehensive reports' }
+        ]
+      },
+      'Free Tools': {
+        description: 'Practical tools that keep visitors coming back',
+        items: [
+          { icon: 'code-2', title: 'Code Snippets', subtitle: 'Reusable Flutter code' },
+          { icon: 'layout', title: 'UI Kit', subtitle: 'Design components for projects' },
+          { icon: 'calculator', title: 'Project Estimator', subtitle: 'Estimate your project timeline' },
+          { icon: 'inspect', title: 'Widget Inspector', subtitle: 'Analyze widget trees' }
+        ]
+      },
+      'Free Resources': {
+        description: 'Assets that demonstrate design and development skills',
+        items: [
+          { icon: 'book', title: 'E-books', subtitle: 'Guides and deep dives' },
+          { icon: 'list-checks', title: 'Checklists', subtitle: 'For development and launch' },
+          { icon: 'map', title: 'Flutter Roadmap', subtitle: 'A learning path for beginners' },
+          { icon: 'mail', title: 'Newsletter', subtitle: 'Stay up to date' }
+        ]
+      },
+      'Community & Connect': {
+        description: 'Encourage engagement and stay connected',
+        items: [
+          { icon: 'github', title: 'GitHub', subtitle: 'See my open-source work' },
+          { icon: 'linkedin', title: 'LinkedIn', subtitle: 'Connect professionally' },
+          { icon: 'message-circle', title: 'Contact Me', subtitle: 'Send a message' },
+          { icon: 'calendar', title: 'Book a Call', subtitle: 'Schedule a meeting' }
+        ]
+      }
+    };
+
+    const categoriesHtml = Object.entries(resourcesData).map(([category, data]) => `
+      <div>
+        <div class="mb-4">
+          <h3 class="text-base font-bold text-gray-900">${category}</h3>
+        </div>
+        <div class="space-y-2">
+          ${data.items.map(item => `
+            <div class="group p-2.5 rounded-lg hover:bg-gradient-to-br hover:from-blue-50 hover:to-indigo-50 transition-all duration-300 cursor-pointer hover:shadow-md">
+              <div class="flex items-start gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center flex-shrink-0 group-hover:from-blue-200 group-hover:to-indigo-200 transition-all duration-300">
+                  <i data-lucide="${item.icon}" class="w-4 h-4 text-blue-600"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h4 class="font-semibold text-gray-900 text-sm mb-0.5 group-hover:text-primary transition-colors">${item.title}</h4>
+                  <p class="text-xs text-gray-600 leading-snug">${item.subtitle}</p>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <div id="resources-mega-menu" 
+           class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[1200px] bg-white rounded-2xl shadow-2xl border border-gray-200 opacity-0 invisible transition-all duration-300 z-50"
+           role="menu"
+           style="transform: translateX(-50%) translateY(10px);">
+        <div class="p-6">
+          <div class="grid grid-cols-4 gap-6">
+            ${categoriesHtml}
+          </div>
+        </div>
+      </div>
     `;
   }
 
@@ -231,20 +454,20 @@ class Navbar {
    */
   init(containerId = 'navbar-container') {
     try {
-      const container = document.getElementById(containerId);
-      if (!container) {
+    const container = document.getElementById(containerId);
+    if (!container) {
         console.error(`[Navbar] Container with id "${containerId}" not found`);
         return false;
-      }
+    }
 
-      // Render navbar
-      container.innerHTML = this.render();
+    // Render navbar
+    container.innerHTML = this.render();
 
       // Cache DOM elements for better performance
       this.cacheElements();
 
-      // Setup event listeners
-      this.setupEventListeners();
+    // Setup event listeners
+    this.setupEventListeners();
 
       console.log('[Navbar] Initialized successfully');
       return true;
@@ -264,6 +487,12 @@ class Navbar {
     this.elements.navLinks = document.querySelectorAll('[data-link]');
     this.elements.brand = document.getElementById('navbar-brand');
     this.elements.menuIconPath = document.getElementById('menu-icon-path');
+    this.elements.megaMenu = document.getElementById('mega-menu');
+    this.elements.servicesBtn = document.getElementById('services-menu-btn');
+    this.elements.servicesDropdown = document.getElementById('services-dropdown');
+    this.elements.resourcesMegaMenu = document.getElementById('resources-mega-menu');
+    this.elements.resourcesBtn = document.getElementById('resources-menu-btn');
+    this.elements.resourcesDropdown = document.getElementById('resources-dropdown');
   }
 
   /**
@@ -299,6 +528,63 @@ class Navbar {
         }
       });
     }
+
+    // Mega menu event listeners
+    this.setupMegaMenuListeners();
+  }
+
+  /**
+   * Setup mega menu event listeners
+   */
+  setupMegaMenuListeners() {
+    // Services mega menu
+    if (this.elements.servicesBtn && this.elements.servicesDropdown) {
+      // Hover events for desktop
+      this.elements.servicesDropdown.addEventListener('mouseenter', () => {
+        this.closeResourcesMegaMenu(); // Close resources menu if open
+        this.openMegaMenu();
+      });
+
+      this.elements.servicesDropdown.addEventListener('mouseleave', () => {
+        this.closeMegaMenu();
+      });
+
+      // Click event for mobile/tablet
+      this.elements.servicesBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.closeResourcesMegaMenu(); // Close resources menu if open
+        this.toggleMegaMenu();
+      });
+
+      // Click on mega menu items to navigate to services page
+      if (this.elements.megaMenu) {
+        this.elements.megaMenu.addEventListener('click', () => {
+          window.location.href = 'services.html';
+        });
+      }
+    }
+
+    // Resources mega menu
+    if (this.elements.resourcesBtn && this.elements.resourcesDropdown) {
+      // Hover events for desktop
+      this.elements.resourcesDropdown.addEventListener('mouseenter', () => {
+        this.closeMegaMenu(); // Close services menu if open
+        this.openResourcesMegaMenu();
+      });
+
+      this.elements.resourcesDropdown.addEventListener('mouseleave', () => {
+        this.closeResourcesMegaMenu();
+      });
+
+      // Click event for mobile/tablet
+      this.elements.resourcesBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.closeMegaMenu(); // Close services menu if open
+        this.toggleResourcesMegaMenu();
+      });
+    }
   }
 
   /**
@@ -311,14 +597,30 @@ class Navbar {
   }
 
   /**
-   * Handle click outside mobile menu
+   * Handle click outside mobile menu and mega menu
    * @param {Event} e - Click event
    */
   handleClickOutside(e) {
-    const { mobileMenu, mobileMenuBtn } = this.elements;
+    const { mobileMenu, mobileMenuBtn, servicesDropdown, resourcesDropdown } = this.elements;
+    
+    // Close mobile menu if clicking outside
     if (this.isMobileMenuOpen && mobileMenu && mobileMenuBtn) {
       if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
         this.closeMobileMenu();
+      }
+    }
+    
+    // Close services mega menu if clicking outside
+    if (this.isMegaMenuOpen && servicesDropdown) {
+      if (!servicesDropdown.contains(e.target)) {
+        this.closeMegaMenu();
+      }
+    }
+    
+    // Close resources mega menu if clicking outside
+    if (this.isResourcesMegaMenuOpen && resourcesDropdown) {
+      if (!resourcesDropdown.contains(e.target)) {
+        this.closeResourcesMegaMenu();
       }
     }
   }
@@ -328,8 +630,16 @@ class Navbar {
    * @param {KeyboardEvent} e - Keyboard event
    */
   handleKeydown(e) {
-    if (e.key === 'Escape' && this.isMobileMenuOpen) {
-      this.closeMobileMenu();
+    if (e.key === 'Escape') {
+      if (this.isMobileMenuOpen) {
+        this.closeMobileMenu();
+      }
+      if (this.isMegaMenuOpen) {
+        this.closeMegaMenu();
+      }
+      if (this.isResourcesMegaMenuOpen) {
+        this.closeResourcesMegaMenu();
+      }
     }
   }
 
@@ -349,21 +659,21 @@ class Navbar {
    * @param {HTMLElement} link - Link element
    */
   handleNavLinkClick(e, link) {
-    const href = link.getAttribute('href');
-    
-    // If it's a page link (not a hash), allow default behavior
+        const href = link.getAttribute('href');
+        
+        // If it's a page link (not a hash), allow default behavior
     if (!href || !href.startsWith('#')) {
-      // Close mobile menu if open
-      this.closeMobileMenu();
-      
+          // Close mobile menu if open
+          this.closeMobileMenu();
+          
       // Add loading state with smooth transition
       link.style.transition = 'opacity 0.2s';
-      link.style.opacity = '0.7';
-      return; // Let the browser handle page navigation
-    }
-    
-    // Handle hash links (for same-page navigation)
-    e.preventDefault();
+          link.style.opacity = '0.7';
+          return; // Let the browser handle page navigation
+        }
+        
+        // Handle hash links (for same-page navigation)
+        e.preventDefault();
     this.scrollToSection(href);
     this.updateActiveLink(link);
     this.closeMobileMenu();
@@ -374,16 +684,16 @@ class Navbar {
    * @param {string} href - Hash link to section
    */
   scrollToSection(href) {
-    const targetSection = document.querySelector(href);
-    
+        const targetSection = document.querySelector(href);
+        
     if (targetSection && this.elements.header) {
       const headerHeight = this.elements.header.offsetHeight;
-      const targetPosition = targetSection.offsetTop - headerHeight;
-      
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
+          const targetPosition = targetSection.offsetTop - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
     }
   }
 
@@ -392,8 +702,8 @@ class Navbar {
    */
   toggleMobileMenu() {
     if (this.isMobileMenuOpen) {
-      this.closeMobileMenu();
-    } else {
+        this.closeMobileMenu();
+      } else {
       this.openMobileMenu();
     }
   }
@@ -411,15 +721,15 @@ class Navbar {
     
     // Animate menu open
     requestAnimationFrame(() => {
-      mobileMenu.style.maxHeight = '500px';
+          mobileMenu.style.maxHeight = '500px';
     });
     
     // Change to close icon
     if (menuIconPath) {
       menuIconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-    }
-    
-    // Update ARIA attributes for accessibility
+      }
+      
+      // Update ARIA attributes for accessibility
     if (mobileMenuBtn) {
       mobileMenuBtn.setAttribute('aria-expanded', 'true');
       mobileMenuBtn.setAttribute('aria-label', 'Close mobile menu');
@@ -450,17 +760,17 @@ class Navbar {
     // Change to hamburger icon
     if (menuIconPath) {
       menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-    }
-    
-    // Update ARIA attributes
+      }
+      
+      // Update ARIA attributes
     if (mobileMenuBtn) {
       mobileMenuBtn.setAttribute('aria-expanded', 'false');
       mobileMenuBtn.setAttribute('aria-label', 'Toggle mobile menu');
     }
-    mobileMenu.setAttribute('aria-hidden', 'true');
-    
-    // Restore body scroll
-    document.body.style.overflow = '';
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      
+      // Restore body scroll
+      document.body.style.overflow = '';
   }
 
   /**
@@ -542,9 +852,125 @@ class Navbar {
     if (scrollPosition > 10) {
       this.elements.header.classList.add('shadow-lg');
       this.elements.header.classList.remove('shadow-md');
-    } else {
+      } else {
       this.elements.header.classList.remove('shadow-lg');
       this.elements.header.classList.add('shadow-md');
+    }
+  }
+
+  /**
+   * Open mega menu
+   */
+  openMegaMenu() {
+    if (!this.elements.megaMenu || !this.elements.servicesBtn) return;
+    
+    this.isMegaMenuOpen = true;
+    this.elements.megaMenu.style.opacity = '1';
+    this.elements.megaMenu.style.visibility = 'visible';
+    this.elements.megaMenu.style.transform = 'translateX(-50%) translateY(0)';
+    
+    // Rotate arrow
+    const arrow = this.elements.servicesBtn.querySelector('.mega-menu-arrow');
+    if (arrow) {
+      arrow.style.transform = 'rotate(180deg)';
+    }
+    
+    // Update ARIA
+    this.elements.servicesBtn.setAttribute('aria-expanded', 'true');
+    
+    // Initialize Lucide icons in the mega menu
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  }
+
+  /**
+   * Close mega menu
+   */
+  closeMegaMenu() {
+    if (!this.elements.megaMenu || !this.elements.servicesBtn) return;
+    
+    this.isMegaMenuOpen = false;
+    this.elements.megaMenu.style.opacity = '0';
+    this.elements.megaMenu.style.visibility = 'hidden';
+    this.elements.megaMenu.style.transform = 'translateX(-50%) translateY(10px)';
+    
+    // Reset arrow rotation
+    const arrow = this.elements.servicesBtn.querySelector('.mega-menu-arrow');
+    if (arrow) {
+      arrow.style.transform = 'rotate(0deg)';
+    }
+    
+    // Update ARIA
+    this.elements.servicesBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  /**
+   * Toggle mega menu
+   */
+  toggleMegaMenu() {
+    if (this.isMegaMenuOpen) {
+      this.closeMegaMenu();
+    } else {
+      this.openMegaMenu();
+    }
+  }
+
+  /**
+   * Open resources mega menu
+   */
+  openResourcesMegaMenu() {
+    if (!this.elements.resourcesMegaMenu || !this.elements.resourcesBtn) return;
+    
+    this.isResourcesMegaMenuOpen = true;
+    this.elements.resourcesMegaMenu.style.opacity = '1';
+    this.elements.resourcesMegaMenu.style.visibility = 'visible';
+    this.elements.resourcesMegaMenu.style.transform = 'translateX(-50%) translateY(0)';
+    
+    // Rotate arrow
+    const arrow = this.elements.resourcesBtn.querySelector('.resources-menu-arrow');
+    if (arrow) {
+      arrow.style.transform = 'rotate(180deg)';
+    }
+    
+    // Update ARIA
+    this.elements.resourcesBtn.setAttribute('aria-expanded', 'true');
+    
+    // Initialize Lucide icons in the mega menu
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  }
+
+  /**
+   * Close resources mega menu
+   */
+  closeResourcesMegaMenu() {
+    if (!this.elements.resourcesMegaMenu || !this.elements.resourcesBtn) return;
+    
+    this.isResourcesMegaMenuOpen = false;
+    this.elements.resourcesMegaMenu.style.opacity = '0';
+    this.elements.resourcesMegaMenu.style.visibility = 'hidden';
+    this.elements.resourcesMegaMenu.style.transform = 'translateX(-50%) translateY(10px)';
+    
+    // Reset arrow rotation
+    const arrow = this.elements.resourcesBtn.querySelector('.resources-menu-arrow');
+    if (arrow) {
+      arrow.style.transform = 'rotate(0deg)';
+    }
+    
+    // Update ARIA
+    this.elements.resourcesBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  /**
+   * Toggle resources mega menu
+   */
+  toggleResourcesMegaMenu() {
+    if (this.isResourcesMegaMenuOpen) {
+      this.closeResourcesMegaMenu();
+    } else {
+      this.openResourcesMegaMenu();
     }
   }
 

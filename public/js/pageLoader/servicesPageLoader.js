@@ -67,15 +67,20 @@ class ServicesPageLoader {
       const services = this.data?.services || [];
 
       servicesGrid.innerHTML = services.map((service, index) => `
-        <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 fade-in" 
+        <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 fade-in" 
              style="animation-delay: ${index * 100}ms">
           <div class="w-16 h-16 ${service.iconBg || 'bg-blue-100'} rounded-lg flex items-center justify-center mb-6">
-            <span class="text-4xl">${service.icon}</span>
+            <i data-lucide="${service.icon}" class="w-8 h-8 ${service.iconColor || 'text-blue-600'}"></i>
           </div>
           <h3 class="text-xl font-bold text-gray-900 mb-4">${service.title}</h3>
           <p class="text-gray-600 leading-relaxed">${service.description}</p>
         </div>
       `).join('');
+      
+      // Initialize Lucide icons
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
     }
   }
 
@@ -99,7 +104,7 @@ class ServicesPageLoader {
       processGrid.innerHTML = steps.map((step, index) => `
         <div class="flex items-start gap-6 fade-in" style="animation-delay: ${index * 150}ms">
           <div class="w-16 h-16 ${step.iconBg || 'bg-blue-500'} rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
-            <span class="text-3xl">${step.icon}</span>
+            <i data-lucide="${step.icon}" class="w-8 h-8 text-white"></i>
           </div>
           <div class="flex-1">
             <h3 class="text-2xl font-bold text-gray-900 mb-3">${step.title}</h3>
@@ -107,6 +112,11 @@ class ServicesPageLoader {
           </div>
         </div>
       `).join('');
+      
+      // Initialize Lucide icons
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
     }
   }
 
