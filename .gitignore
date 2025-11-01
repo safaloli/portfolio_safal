@@ -1,6 +1,6 @@
 # Dependencies
 node_modules/
-package-lock.json
+# package-lock.json - commit this for dependency consistency
 yarn.lock
 
 # Environment variables
